@@ -16,7 +16,7 @@ class Ordenes{
         bool tipo;
         string estado;
     public:
-        Ordenes(Clientes*, Negocios*, Repartidores*, bool, string);
+        Ordenes(Clientes*, Repartidores*, bool, string);
         string toString();
 };
 #endif

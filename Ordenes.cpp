@@ -1,8 +1,7 @@
 #include "Ordenes.h"
 
-Ordenes::Ordenes(Clientes* Clientes, Negocios* Negocio, Repartidores* Repartidor, bool Tipo, string Estado){
+Ordenes::Ordenes(Clientes* Clientes, Repartidores* Repartidor, bool Tipo, string Estado){
     clientes = Clientes;
-    negocio = Negocio;
     repartidor = Repartidor;
     tipo = Tipo;
     estado = Estado;

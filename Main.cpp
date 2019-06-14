@@ -256,14 +256,12 @@ vector<Ordenes*> agregarOrden(vector<Ordenes*> ordenes, vector<Personas*> person
     cout<<"Ingrese la posición del cliente que desea agregar una orden: ";
     int posPersona;
     cin>>posPersona;
-    cout<<"Ingrese la posición del negocio de donde se pedirá la orden: ";
-    int posNegocio;
-    cin>>posNegocio;
     cout<<"Ingrese la posición del repartidor que entregará el pedido: ";
     int posRepartidor;
     cin>>posRepartidor;
     cout<<"Es comestible [S/N]: ";
-    int comestible;
+    char comestible;
+    cin>>comestible;
     bool tipo;
     if(comestible == 's' || comestible == 'S'){
         tipo = true;
@@ -276,13 +274,13 @@ vector<Ordenes*> agregarOrden(vector<Ordenes*> ordenes, vector<Personas*> person
         <<"Ingrese una opción: ";
     
     int opcion = 0;
-    Clientes* clientes = dynamic_cast<Clientes*>(personas[posPersona]);
-    Negocios* negocio = dynamic_cast<Negocios*>(personas[posNegocio]);
-    Repartidores* repartidor = dynamic_cast<Repartidores*>(personas[posRepartidor]);
     cin>>opcion;
+    Clientes* clientes = dynamic_cast<Clientes*>(personas[posPersona]);
+    Repartidores* repartidor = dynamic_cast<Repartidores*>(personas[posRepartidor]);
     if(opcion == 1){
         estado = "Confirmada";
-        ordenes.push_back(new Ordenes(clientes, negocio, repartidor,tipo,estado));
+        ordenes.push_back(new Ordenes(clientes, repartidor,tipo,estado));
+
         int pedidos = dynamic_cast<Clientes*>(personas[posPersona])->getPedidos();
         dynamic_cast<Clientes*>(personas[posPersona])->setPedidos(pedidos++);
 
@@ -305,15 +303,15 @@ vector<Ordenes*> agregarOrden(vector<Ordenes*> ordenes, vector<Personas*> person
         string salto = "\n";
         int edad = clientes->getEdad();
         string ubicacion = clientes->getDireccion();
-        outFile<<"      FACTURA";
-        outFile<<salto;
-        outFile<<nombre;
-        outFile<<edad;
-        outFile<<ubicacion;
+        outFile<<"      FACTURA\n"
+            <<"Nombre: "<<nombre<<"\n"
+            <<"Edad: "<<edad<<"\n"
+            <<"Edad: "<<ubicacion;
         outFile.close();
+        cout<<"Orden agregada exitosamente"<<endl;
     }else{
         estado = "Cancelada";
-        ordenes.push_back(new Ordenes(clientes, negocio, repartidor,tipo,estado));
+        ordenes.push_back(new Ordenes(clientes, repartidor,tipo,estado));
 
     }
     return ordenes;
